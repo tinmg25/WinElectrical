@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const Home = () => {
   return (
     <section className="py-20 px-4 max-w-7xl mx-auto">
@@ -34,7 +36,7 @@ const Home = () => {
 
         {/* Right side: Photo */}
         <div className="md:w-1/2 flex justify-center">
-          <img
+          <Image
             src="/images/satoru-gojo.png"
             alt="Win Solar & Electrical Owner"
             className="rounded-lg shadow-lg max-w-full h-auto"
