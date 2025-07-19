@@ -40,6 +40,8 @@ const Home = () => {
             src="/images/satoru-gojo.png"
             alt="Win Solar & Electrical Owner"
             className="rounded-lg shadow-lg max-w-full h-auto"
+            width={300}
+            height={500}
           />
         </div>
       </div>

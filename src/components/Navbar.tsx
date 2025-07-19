@@ -18,11 +18,18 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6 font-medium">
-          <Link href="/" className="text-black">Home</Link>
-          <Link href="/about" className="text-black">About</Link>
-          <Link href="/services" className="text-black">Services</Link>
-          <Link href="/testimonials" className="text-black">Testimonials</Link>
-          <Link href="/contact" className="text-black">Contact</Link>
+          <Link href="/" className="text-black">
+            Home
+          </Link>
+          <Link href="/services" className="text-black">
+            Services
+          </Link>
+          <Link href="/testimonials" className="text-black">
+            Testimonials
+          </Link>
+          <Link href="/contact" className="text-black">
+            Contact
+          </Link>
         </div>
 
         {/* Mobile Menu Icon */}
@@ -40,15 +47,12 @@ const Navbar = () => {
       {/* Mobile Menu Dropdown */}
       {menuOpen && (
         <div className="md:hidden mt-2 space-y-2 px-2 pb-4">
-          <Link href="/" onClick={() => setMenuOpen(false)} className="block text-black">
-            Home
-          </Link>
           <Link
-            href="/about"
+            href="/"
             onClick={() => setMenuOpen(false)}
             className="block text-black"
           >
-            About
+            Home
           </Link>
           <Link
             href="/services"
