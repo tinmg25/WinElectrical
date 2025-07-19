@@ -13,7 +13,7 @@ const Home = () => {
             Electrical and Solar Installation
           </h2>
           <p className="text-lg text-gray-400 mb-6">
-            I’ve worked in the electrical industry for over 30 years — from
+            I&rsquo;ve worked in the electrical industry for over 30 years — from
             household wiring and industrial electrical systems to solar
             installations in remote areas. My journey has taken me across the
             country, solving electrical challenges in cities, villages, and

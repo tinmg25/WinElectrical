@@ -47,7 +47,7 @@ export default function ServicesPage() {
       <Separator className="my-10" />
 
       <p className="text-center text-muted-foreground">
-        Need something custom? <span className="text-primary font-medium">Contact us</span> and we'll tailor the solution just for you.
+        Need something custom? <span className="text-primary font-medium">Contact us</span> and we&rsquo;ll tailor the solution just for you.
       </p>
     </div>
   );

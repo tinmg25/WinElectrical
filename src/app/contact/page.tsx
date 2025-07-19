@@ -2,53 +2,110 @@
 
 import { useState } from "react";
 
-export default function ContactForm() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [success, setSuccess] = useState(false);
+export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const [status, setStatus] = useState("");
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setStatus("Sending...");
+
     const res = await fetch("/api/send-email", {
       method: "POST",
-      body: JSON.stringify(form),
-      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
     });
+
     const data = await res.json();
-    if (data.success) setSuccess(true);
+    if (data.success) {
+      setStatus("Message sent successfully!");
+      setFormData({ name: "", email: "", message: "" });
+    } else {
+      setStatus("Failed to send message.");
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 max-w-md">
-      <input
-        type="text"
-        placeholder="Your Name"
-        value={form.name}
-        onChange={(e) => setForm({ ...form, name: e.target.value })}
-        required
-        className="w-full border p-2"
-      />
-      <input
-        type="email"
-        placeholder="Your Email"
-        value={form.email}
-        onChange={(e) => setForm({ ...form, email: e.target.value })}
-        required
-        className="w-full border p-2"
-      />
-      <textarea
-        placeholder="Your Message"
-        value={form.message}
-        onChange={(e) => setForm({ ...form, message: e.target.value })}
-        required
-        className="w-full border p-2"
-      />
-      <button
-        type="submit"
-        className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded"
-      >
-        Send Message
-      </button>
-      {success && <p className="text-green-500">Message sent successfully!</p>}
-    </form>
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-10">
+      <div className="max-w-2xl w-full bg-white shadow-xl rounded-2xl p-8">
+        <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
+          Contact Us
+        </h1>
+
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label
+              htmlFor="name"
+              className="block mb-1 text-sm font-medium text-gray-700"
+            >
+              Name
+            </label>
+            <input
+              name="name"
+              type="text"
+              required
+              value={formData.name}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="email"
+              className="block mb-1 text-sm font-medium text-gray-700"
+            >
+              Email
+            </label>
+            <input
+              name="email"
+              type="email"
+              required
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="message"
+              className="block mb-1 text-sm font-medium text-gray-700"
+            >
+              Message
+            </label>
+            <textarea
+              name="message"
+              rows={5}
+              required
+              value={formData.message}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+          >
+            Send Message
+          </button>
+
+          {status && (
+            <p className="text-center text-sm text-gray-600 mt-2">{status}</p>
+          )}
+        </form>
+      </div>
+    </div>
   );
 }
